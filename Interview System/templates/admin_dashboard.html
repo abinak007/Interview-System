@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        .admin-hero {
+            text-align: center;
+            margin-top: 60px;
+        }
+    
+        .welcome-admin {
+            font-size: 3em;
+            font-weight: bold;
+            margin-bottom: 40px;
+        }
+    
+        .dashboard-table {
+            margin: 0 auto;
+            width: 80%;
+            border-collapse: collapse;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 1.1em;
+        }
+    
+        .dashboard-table th {
+            background-color: #2c3e50;
+            color: #ffffff;
+            text-transform: uppercase;
+            padding: 20px;
+            letter-spacing: 1px;
+        }
+    
+        .dashboard-table td {
+            padding: 18px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+    
+        .dashboard-table tr:nth-child(even) td {
+            background-color: #e9ecef;
+        }
+    
+        .dashboard-table tr:hover td {
+            background-color: #d1ecf1;
+            transition: background-color 0.3s ease;
+        }
+    </style>
+    
+</head>
+<body>
+    
+    <nav class="navbar">
+        <div class="logo">AI-Powered Virtual Interview</div>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('admin_dashboard') }}">Home</a></li>
+            <li><a href="{{ url_for('about') }}">About</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+            <li><a href="{{ url_for('logout') }}" class="login-btn">Logout</a></li>
+        </ul>
+    </nav>
+    
+    <header class="admin-hero">
+        <h1 class="welcome-admin">Welcome, Admin!</h1>
+        <table class="dashboard-table">
+            <tr>
+                <th>Category</th>
+                <th>Count</th>
+            </tr>
+            <tr>
+                <td><a href="{{ url_for('view_users') }}">Total Users</a></td>
+                <td>{{ user_count }}</td>
+            </tr>
+            <tr>
+                <td>Interviews</td>
+                <td>{{ interview_count }}</td>
+            </tr>
+            <tr>
+                <td>Responses </td>
+                <td>{{ response_count }}</td>
+            </tr>
+            <tr>
+                <td>Emotion </td>
+                <td>{{ emotion_count }}</td>
+            </tr>
+            <tr>
+                <td><a href="{{ url_for('view_feedback') }}">Feedback </a></td>
+                <td>{{ feedback_count }}</td>
+            </tr>
+        </table>
+    </header>
+
+</body>
+</html>

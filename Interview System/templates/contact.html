@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+    <div class="navbar">
+        <h1>AI-Powered Virtual Interview</h1>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('about') }}">About</a></li>
+            <li><a href="{{ url_for('login') }}" class="login-btn">Login</a></li>
+        </ul>
+    </div>
+
+    <div class="hero">
+        <h2>Contact Us</h2>
+        <p>Need help? Reach out to us!</p>
+        <h2>Our Contact Details</h2>
+        <p>Email: support@aivirtualinterview.com</p>
+        <p>Phone: +1 234 567 890</p>
+        <p>Address: 123 AI Street, Tech City, USA</p>
+    </div>
+
+</body>
+</html>

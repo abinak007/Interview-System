@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+    <div class="interview-container">
+        <h2>AI-Powered Virtual Interview</h2>
+
+        <!-- Timer -->
+        <div id="timer">Time Left: <span id="time">10:00</span></div>
+
+        <!-- Camera Feed -->
+        <video id="camera-feed" autoplay></video>
+
+        <div id="question-box">
+            1.Tell me about yourself.<br>
+2.What are your strengths and weaknesses?<br>
+3.Why should we hire you?<br>
+4.Describe a challenging situation and how you handled it.<br>
+5.Where do you see yourself in 5 years?<br>
+6.Tell me about a time you worked in a team.<br>
+7.How do you handle stress and pressure?<br>
+8.What are your salary expectations?<br>
+9.Do you have any questions for us?<br>
+10.What do you know about our company?<br>
+        </div>
+        
+        <!-- Response Input -->
+        <textarea id="text-answer" placeholder="Type your answer here..."></textarea>
+        
+        <!-- Voice Recording -->
+        <button id="record-btn">🎤 Record Answer</button>
+        <p id="recording-status"></p>
+
+        <!-- Submit Answer -->
+       <button id="next-btn">Submit Answer</button>
+
+        <!-- Submit Button -->
+        <button id="submit-btn">Submit Interview</button>
+    </div>
+
+    <script src="{{ url_for('static', filename='interview.js') }}"></script>    
+    <script>
+        // Start the camera
+        async function startCamera() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                document.getElementById('camera-feed').srcObject = stream;
+            } catch (error) {
+                console.error('Error accessing camera:', error);
+            }
+        }
+
+        window.onload = function() {
+            startCamera();
+            startTimer();
+        };
+
+        // Timer Functionality
+        function startTimer() {
+            let timeLeft = 600; // 10 minutes in seconds
+            const timerDisplay = document.getElementById("time");
+            const timerInterval = setInterval(() => {
+                let minutes = Math.floor(timeLeft / 60);
+                let seconds = timeLeft % 60;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+                timerDisplay.textContent = `${minutes}:${seconds}`;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    alert("Time's up! You have failed. Try again.");
+                    window.location.href = "{{ url_for('interview_failed') }}";
+                }
+                timeLeft--;
+            }, 1000);
+        }
+
+        // Voice Recording Functionality
+        let mediaRecorder;
+        let audioChunks = [];
+
+        document.getElementById("record-btn").addEventListener("click", async () => {
+            if (!mediaRecorder || mediaRecorder.state === "inactive") {
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    mediaRecorder = new MediaRecorder(stream);
+                    mediaRecorder.start();
+                    audioChunks = [];
+                    mediaRecorder.ondataavailable = event => audioChunks.push(event.data);
+                    document.getElementById("recording-status").innerText = "Recording...";
+                } catch (error) {
+                    console.error("Error accessing microphone:", error);
+                }
+            } else {
+                mediaRecorder.stop();
+                mediaRecorder.onstop = async () => {
+                    document.getElementById("recording-status").innerText = "Recording stopped. Processing...";
+                    const audioBlob = new Blob(audioChunks, { type: "audio/wav" });
+                    const formData = new FormData();
+                    formData.append("audio", audioBlob);
+                    
+                    await fetch("/upload_audio", {
+                        method: "POST",
+                        body: formData
+                    });
+                    
+                    document.getElementById("recording-status").innerText = "Recording saved.";
+                };
+            }
+        });
+
+        document.getElementById("submit-btn").addEventListener("click", () => {
+            alert("Interview submitted! Redirecting to results page...");
+            window.location.href = "/results";
+        });
+    </script>
+
+<script>
+    async function fetchAllQuestions() {
+        const response = await fetch('/get_all_questions');
+        const questions = await response.json();
+
+        const container = document.getElementById('questions-box');
+        container.innerHTML = ''; // Clear any existing content
+
+        questions.forEach(q => {
+            const questionDiv = document.createElement('div');
+            questionDiv.innerHTML = `<strong>ID ${q.id}:</strong> ${q.question}`;
+            container.appendChild(questionDiv);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        fetchAllQuestions();
+    });
+</script>
+</body>
+</html>

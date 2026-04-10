@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Feedback</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">AI-Powered Virtual Interview</div>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('dashboard') }}">Home</a></li>
+            <li><a href="{{ url_for('logout') }}" class="login-btn">Logout</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1>We’d love your feedback!</h1>
+        <form action="{{ url_for('submit_feedback') }}" method="POST">
+            <label for="experience">How was your interview experience?</label><br>
+            <textarea id="experience" name="experience" rows="6" cols="50" required></textarea><br><br>
+
+            <label for="suggestion">Any suggestions for improvement?</label><br>
+            <textarea id="suggestion" name="suggestion" rows="4" cols="50"></textarea><br><br>
+
+            <input type="submit" value="Submit Feedback" class="cta-btn">
+        </form>
+    </div>
+
+</body>
+</html>

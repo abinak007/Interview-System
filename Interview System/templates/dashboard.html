@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body >
+    
+    <nav class="navbar">
+        <div class="logo">AI-Powered Virtual Interview</div>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('dashboard') }}">Home</a></li>
+            <li><a href="{{ url_for('about') }}">About</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+            <li><a href="{{ url_for('logout') }}" class="login-btn">Logout</a></li>
+        </ul>
+    </nav>
+    
+    <header class="hero">
+        <div  class="hero-content">
+            <h1>Welcome, {{ session['username'] }}!</h1>
+            <p>Your AI-driven interview assistant for smarter hiring.</p>
+            <a href="{{ url_for('start_interview') }}" class="cta-btn">Let's Begin</a>
+            
+        </div>
+        <div class="instructions-box">
+            <h2>Instructions :</h2>
+            <p>
+                1. <strong>No Do-Overs:</strong><br>
+                Once the interview begins, there’s no going back or restarting—so make sure you’re ready before you hit that start button.<br><br>
+        
+                2. <strong>10-Minute Timer:</strong><br>
+                You’ll have a total of 10 minutes to complete everything. Keep an eye on the clock!<br><br>
+        
+                3. <strong>Answering Questions:</strong><br>
+                There will be 10 questions, and you can respond using either text or audio—whichever you’re more comfortable with.For the moment please use text method in future audio implementation will be done.The audio button is responsive.<br><br>
+        
+                4. <strong>Emotion Analysis:</strong><br>
+                Your camera may be accessed to understand your emotional responses during the interview.<br>
+                If camera access isn’t granted, your emotion score will be estimated based on how you answer.<br><br>
+        
+                5. <strong>Finishing Up:</strong><br>
+                There’s a Submit button available—use it when you’re done, or just let the timer run out.<br>
+                Either way, your score will be based on whatever you’ve answered within the time limit.<br><br>
+        
+                6. <strong>Just a Heads-Up:</strong><br>
+                This is a test version of the interview platform, mainly designed to help you practice.<br>
+                The scoring system is still being fine-tuned, so it might not be perfect just yet.<br>
+                Don’t stress too much about the score—it may not reflect your full potential and can vary depending on how things go.<br>
+                The main goal here is to help you improve your skills and get comfortable with the process.
+            </p>
+        </div>        
+    </header>
+</body>
+</html>

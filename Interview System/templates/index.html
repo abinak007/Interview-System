@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered Virtual Interview</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    
+    <nav class="navbar">
+        <div class="logo">AI-Powered Virtual Interview</div>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('about') }}">About</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+            <li><a href="/login" class="login-btn">Login</a></li>
+        </ul>
+    </nav>
+    
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Welcome to AI-Powered Virtual Interview</h1>
+            <p>Your AI-driven interview assistant for your help.</p>
+            <a href="{{ url_for('login') }}" class="cta-btn">Get Started</a>
+        </div>
+    </header>
+</body>
+</html

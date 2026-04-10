@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+    <div class="signup-container">
+        <!-- Signup Form -->
+        <div class="signup-form">
+            <h2>Register</h2>
+            <form action="{{ url_for('signup') }}" method="post">
+                <input type="text" name="username" placeholder="Enter Username" required>
+                <input type="password" name="password" placeholder="Enter Password" required>
+                <button type="submit">Register</button>
+            </form>
+            <p>Already have an account? <a href="{{ url_for('login') }}">Login here</a></p>
+        </div>
+
+        <!-- Instructions Box -->
+        <div class="instructions">
+            <h3>Password Requirements:</h3>
+            <ul>
+                <li>Must contain at least **one uppercase** and **one lowercase** letter.</li>
+                <li>Must be at least **4 characters** long.</li>
+                <li>Should contain at least **one number**.</li>
+                <li>Should contain at least **one special character** (e.g., `@, #, $, %`).</li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>

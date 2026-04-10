@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    
+    <nav class="navbar">
+        <div class="logo">AI-Powered Virtual Interview</div>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('dashboard') }}">Home</a></li>
+            <li><a href="{{ url_for('about') }}">About</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+            <li><a href="{{ url_for('logout') }}" class="login-btn">Logout</a></li>
+        </ul>
+    </nav>
+    
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Your result, {{ session['username'] }}!</h1>
+            <p>
+                {% if score %}
+                    Your interview score: {{ score }}/10.0<br>
+                    Well done! Your speaking and writing need improvement.
+                {% else %}
+                    No scores available yet.
+                {% endif %}
+                <br>
+                Expression Score: {{ confidence_level }}/10.0<br>
+                Your expression shows you are {{ expression_analysis }}.
+            </p>
+            <a href="{{ url_for('dashboard') }}" class="cta-btn">Back to Home</a>
+            <p></p>
+            <a href="{{ url_for('feedback') }}" class="cta-btn" >Give Feedback</a>
+            <div class="score-table" style="margin-top: 40px;">
+                <h2>Confidence Score Reference</h2>
+                <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr>
+                            <th>Score</th>
+                            <th>Label</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>10</td><td>Highly Confident</td><td>Displays strong contact, calm posture, natural facial expressions, and fluent response.</td></tr>
+                        <tr><td>9</td><td>Very Confident</td><td>Shows positive body language, steady response, and clear articulation.</td></tr>
+                        <tr><td>8</td><td>Confident</td><td>Maintains good contact and posture, responds with clarity but slight hesitation.</td></tr>
+                        <tr><td>7</td><td>Fairly Confident</td><td>Expresses ideas well but may occasionally avoid contact or show mild anxiety. Confidence is present but could be stronger.</td></tr>
+                        <tr><td>6</td><td>Moderately Confident</td><td>Starts strong but may display inconsistent expressions or response.</td></tr>
+                        <tr><td>5</td><td>Neutral</td><td>Balanced presence with mixed signals.</td></tr>
+                        <tr><td>4</td><td>Slightly Hesitant</td><td>Avoids contact at times and fair response.</td></tr>
+                        <tr><td>3</td><td>Nervous</td><td>Expressions or response suggest discomfort.</td></tr>
+                        <tr><td>2</td><td>Very Nervous</td><td>Clearly uneasy.</td></tr>
+                        <tr><td>1</td><td>Lacking Confidence</td><td>Strong signs of nervousness or discomfort.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+    </header>
+
+</body>
+</html>

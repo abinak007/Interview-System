@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+    <div class="navbar">
+        <h1>AI- Powered Virtual Interview</h1>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+            <li><a href="{{ url_for('login') }}" class="login-btn">Login</a></li>
+        </ul>
+    </div>
+
+    <div class="hero">
+        <h2>About AI Virtual Interview</h2>
+        <p>Our AI-Powered Virtual Interview System revolutionizes hiring by providing automated assessments.</p>
+        <h2>Why Choose Us?</h2>
+        <p>Our AI technology evaluates candidates based on predefined criteria, ensuring fair and unbiased hiring.</p>
+    </div>
+
+</body>
+</html>

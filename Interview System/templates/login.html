@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>Login</h2>
+        <form action="{{ url_for('login') }}" method="post">
+            <select name="user_type">
+                <option value="user">User</option>
+                <option value="admin">Admin</option>
+            </select>
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <a href="{{ url_for('signup') }}">Don't have an account? Register</a>
+         <br>
+
+        <!-- Back to Home Button -->
+        <a href="{{ url_for('home') }}" class="back-btn">← Back to Home</a>
+    </div>
+
+    <script>
+        function toggleSignup() {
+            let userType = document.getElementById('user_type').value;
+            let signupLink = document.getElementById('signup-link');
+            if (userType === 'admin') {
+                signupLink.style.display = 'none';
+            } else {
+                signupLink.style.display = 'block';
+            }
+        }
+    </script>
+
+</body>
+</html>
